@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
-import { type Transition, type Variants, useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import { type Transition, type Variants } from "framer-motion";
 
 const defaultTransition: Transition = {
   duration: 0.4,
@@ -40,8 +40,41 @@ function buildStaggerVariants(shouldReduceMotion: boolean): Variants {
   };
 }
 
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+    };
+
+    updatePreference();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updatePreference);
+
+      return () => {
+        mediaQuery.removeEventListener("change", updatePreference);
+      };
+    }
+
+    mediaQuery.addListener(updatePreference);
+
+    return () => {
+      mediaQuery.removeListener(updatePreference);
+    };
+  }, []);
+
+  return prefersReducedMotion;
+}
+
 export function useRevealMotion() {
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   return useMemo(
     () => ({
