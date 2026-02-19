@@ -15,12 +15,12 @@ export type HighlightsContent = {
 };
 
 export const highlightsContent: HighlightsContent = {
-  title: "Destaques Calcont",
-  description: "Diferenciais que combinam governanca contabil, velocidade operacional e atendimento consultivo.",
+  title: "Destaques da Calcont",
+  description: "Diferenciais que combinam governança contábil, velocidade operacional e atendimento consultivo.",
   items: [
     {
       id: "highlight-1",
-      title: "Governanca e conformidade",
+      title: "Governança e conformidade",
       description: "Processos padronizados para reduzir risco e manter previsibilidade fiscal.",
       icon: "ShieldCheck",
       emphasis: "Menos risco operacional"
@@ -28,35 +28,35 @@ export const highlightsContent: HighlightsContent = {
     {
       id: "highlight-2",
       title: "Leitura gerencial clara",
-      description: "Informacoes objetivas para apoiar decisoes financeiras com mais confianca.",
+      description: "Informações objetivas para apoiar decisões financeiras com mais confiança.",
       icon: "TrendingUp",
-      emphasis: "Decisao com dados"
+      emphasis: "Decisão com dados"
     },
     {
       id: "highlight-3",
       title: "Prazos sob controle",
-      description: "Ritmo de entrega consistente para manter sua operacao em dia com o calendario.",
+      description: "Ritmo de entrega consistente para manter sua operação em dia com o calendário.",
       icon: "Clock3",
-      emphasis: "Rotina previsivel"
+      emphasis: "Rotina previsível"
     },
     {
       id: "highlight-4",
       title: "Equipe especializada",
-      description: "Atendimento proximo com profissionais experientes em diferentes segmentos.",
+      description: "Atendimento próximo com profissionais experientes em diferentes segmentos.",
       icon: "Users",
       emphasis: "Apoio consultivo"
     },
     {
       id: "highlight-5",
-      title: "Documentacao organizada",
+      title: "Documentação organizada",
       description: "Fluxo de documentos com rastreabilidade para auditoria e acompanhamento.",
       icon: "FileCheck",
-      emphasis: "Controle e historico"
+      emphasis: "Controle e histórico"
     },
     {
       id: "highlight-6",
       title: "Canal direto",
-      description: "Contato rapido para resolver duvidas e agilizar demandas prioritarias.",
+      description: "Contato rápido para resolver dúvidas e agilizar demandas prioritárias.",
       icon: "MessageCircle",
       emphasis: "Resposta objetiva"
     }

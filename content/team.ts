@@ -21,82 +21,82 @@ export type TeamContent = {
 
 export const teamContent: TeamContent = {
   title: "Equipe por cidade",
-  description: "Profissionais distribuidos por unidade para garantir atendimento proximo e execucao consistente.",
-  emptyStateLabel: "Equipe em atualizacao.",
-  fallbackDescription: "Profissional da equipe Calcont com atuacao na area.",
+  description: "Profissionais distribuídos por unidade para garantir atendimento próximo e execução consistente.",
+  emptyStateLabel: "Equipe em atualização.",
+  fallbackDescription: "Profissional da equipe Calcont com atuação na área.",
   fallbackImageSrc: "/team/placeholder.jpg",
   cityLabels: {
-    maceio: "Maceio",
+    maceio: "Maceió",
     marechal: "Marechal"
   },
   cityHighlights: {
-    maceio: "Operacao central com foco estrategico e integracao entre frentes.",
-    marechal: "Atendimento regional com execucao fiscal, contabil e trabalhista dedicada."
+    maceio: "Operação central com foco estratégico e integração entre frentes.",
+    marechal: "Atendimento regional com execução fiscal, contábil e trabalhista dedicada."
   },
   membersByCity: {
     maceio: [
       {
         name: "Cleiton",
-        role: "Gerencia",
-        description: "Coordena o planejamento operacional e conecta as frentes contabil, fiscal e trabalhista com foco em previsibilidade.",
+        role: "Gerência",
+        description: "Coordena o planejamento operacional e conecta as frentes contábil, fiscal e trabalhista com foco em previsibilidade.",
         imageSrc: "/team/cleiton.jpg",
         imageAlt: "Retrato profissional de Cleiton"
       },
       {
         name: "Joeline",
-        role: "Gerencia",
-        description: "Atua na gestao de processos internos e no acompanhamento de entregas para manter o padrao de qualidade da equipe.",
+        role: "Gerência",
+        description: "Atua na gestão de processos internos e no acompanhamento de entregas para manter o padrão de qualidade da equipe.",
         imageSrc: "/team/joeline.jpg",
         imageAlt: "Retrato profissional de Joeline"
       },
       {
         name: "Niure",
         role: "Fiscal",
-        description: "Responsavel pela rotina fiscal e pelo monitoramento de obrigacoes, mantendo conformidade e seguranca tributaria.",
+        description: "Responsável pela rotina fiscal e pelo monitoramento de obrigações, mantendo conformidade e segurança tributária.",
         imageSrc: "/team/niure.jpg",
         imageAlt: "Retrato profissional de Niure"
       },
       {
         name: "Jurandir",
         role: "Trabalhista",
-        description: "Conduz processos trabalhistas e orienta clientes na administracao de folha e encargos com eficiencia e controle.",
+        description: "Conduz processos trabalhistas e orienta clientes na administração de folha e encargos com eficiência e controle.",
         imageSrc: "/team/jurandir.jpg",
         imageAlt: "Retrato profissional de Jurandir"
       },
       {
         name: "Edson",
-        role: "Contabil",
-        description: "Cuida da consistencia contabil e apoia analises gerenciais para decisoes financeiras mais seguras.",
+        role: "Contábil",
+        description: "Cuida da consistência contábil e apoia análises gerenciais para decisões financeiras mais seguras.",
         imageSrc: "/team/edson-maceio.jpg",
-        imageAlt: "Retrato profissional de Edson na unidade Maceio"
+        imageAlt: "Retrato profissional de Edson na unidade Maceió"
       }
     ],
     marechal: [
       {
         name: "Ruan",
-        role: "Gerencia",
-        description: "Lidera a unidade de Marechal e organiza a execucao diaria com foco em relacionamento e resultado.",
+        role: "Gerência",
+        description: "Lidera a unidade de Marechal e organiza a execução diária com foco em relacionamento e resultado.",
         imageSrc: "/team/ruan.jpg",
         imageAlt: "Retrato profissional de Ruan"
       },
       {
         name: "Antonio Carlos",
         role: "Fiscal",
-        description: "Atua no acompanhamento fiscal e na validacao das obrigacoes para manter regularidade e estabilidade operacional.",
+        description: "Atua no acompanhamento fiscal e na validação das obrigações para manter regularidade e estabilidade operacional.",
         imageSrc: "/team/antonio-carlos.jpg",
         imageAlt: "Retrato profissional de Antonio Carlos"
       },
       {
         name: "Stefani",
         role: "Trabalhista",
-        description: "Conduz rotinas trabalhistas e assegura cumprimento de prazos, documentos e orientacoes legais no dia a dia.",
+        description: "Conduz rotinas trabalhistas e assegura cumprimento de prazos, documentos e orientações legais no dia a dia.",
         imageSrc: "/team/stefani.jpg",
         imageAlt: "Retrato profissional de Stefani"
       },
       {
         name: "Edson",
-        role: "Contabil",
-        description: "Apoia a rotina contabil da unidade com organizacao tecnica e acompanhamento continuo de indicadores.",
+        role: "Contábil",
+        description: "Apoia a rotina contábil da unidade com organização técnica e acompanhamento contínuo de indicadores.",
         imageSrc: "/team/edson-marechal.jpg",
         imageAlt: "Retrato profissional de Edson na unidade Marechal"
       }
