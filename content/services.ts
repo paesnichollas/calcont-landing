@@ -15,45 +15,45 @@ export type ServicesContent = {
 };
 
 export const servicesContent: ServicesContent = {
-  badge: "Servicos",
-  title: "Solucoes completas para gestao contabil e tributaria",
-  description: "Selecione um servico para visualizar detalhes operacionais, entregas e foco de atendimento.",
-  emptyStateLabel: "Detalhes deste servico serao atualizados em breve.",
+  badge: "Serviços",
+  title: "Soluções completas para gestão contábil e tributária",
+  description: "Selecione um serviço para visualizar detalhes operacionais, entregas e foco de atendimento.",
+  emptyStateLabel: "Detalhes deste serviço serão atualizados em breve.",
   items: [
     {
       id: "contabil",
       title: "Contabilidade",
-      summary: "Escrituracao, demonstrativos e fechamento com previsibilidade.",
-      details: "Rotina contabil completa com suporte para leitura de indicadores e tomada de decisao.",
+      summary: "Escrituração, demonstrativos e fechamento com previsibilidade.",
+      details: "Rotina contábil completa com suporte para leitura de indicadores e tomada de decisão.",
       highlights: ["Fechamento mensal", "Demonstrativos gerenciais", "Acompanhamento consultivo"]
     },
     {
       id: "fiscal",
       title: "Fiscal",
-      summary: "Gestao tributaria e obrigacoes acessorias com rotina organizada.",
-      details: "Planejamento e execucao fiscal para reduzir riscos e manter conformidade continua.",
-      highlights: ["Apuracao de tributos", "Obrigacoes acessorias", "Revisao fiscal periodica"]
+      summary: "Gestão tributária e obrigações acessórias com rotina organizada.",
+      details: "Planejamento e execução fiscal para reduzir riscos e manter conformidade contínua.",
+      highlights: ["Apuração de tributos", "Obrigações acessórias", "Revisão fiscal periódica"]
     },
     {
       id: "trabalhista",
       title: "Trabalhista",
-      summary: "Rotinas de folha, admissao, desligamento e conformidade.",
-      details: "Gestao do departamento pessoal com processos padronizados e seguranca juridica.",
-      highlights: ["Folha de pagamento", "Admissoes e rescisoes", "Encargos e eSocial"]
+      summary: "Rotinas de folha, admissão, desligamento e conformidade.",
+      details: "Gestão do departamento pessoal com processos padronizados e segurança jurídica.",
+      highlights: ["Folha de pagamento", "Admissões e rescisões", "Encargos e eSocial"]
     },
     {
       id: "certificacao-digital",
-      title: "Certificacao Digital",
-      summary: "Emissao e renovacao de certificados para operacao segura e valida.",
-      details: "Apoio completo para emissao, renovacao e uso correto do certificado digital da empresa.",
-      highlights: ["Emissao assistida", "Renovacao programada", "Suporte para instalacao"]
+      title: "Certificação Digital",
+      summary: "Emissão e renovação de certificados para operação segura e válida.",
+      details: "Apoio completo para emissão, renovação e uso correto do certificado digital da empresa.",
+      highlights: ["Emissão assistida", "Renovação programada", "Suporte para instalação"]
     },
     {
       id: "planejamento-tributario",
-      title: "Planejamento Tributario",
-      summary: "Estrategias para eficiencia fiscal alinhadas ao perfil do negocio.",
-      details: "Analise do enquadramento tributario e cenarios para melhorar margem e previsibilidade.",
-      highlights: ["Analise de regime", "Projecoes tributarias", "Plano de adequacao"]
+      title: "Planejamento Tributário",
+      summary: "Estratégias para eficiência fiscal alinhadas ao perfil do negócio.",
+      details: "Análise do enquadramento tributário e cenários para melhorar margem e previsibilidade.",
+      highlights: ["Análise de regime", "Projeções tributárias", "Plano de adequação"]
     }
   ]
 };

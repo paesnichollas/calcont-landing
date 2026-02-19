@@ -14,14 +14,14 @@ export function CtaSection() {
   const hoverMotion = shouldReduceMotion ? undefined : { y: -2, scale: 1.01 };
 
   return (
-    <ScrollRevealSection className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6 md:py-16" variants={stagger}>
+    <ScrollRevealSection id="contato" className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6 md:py-16" variants={stagger}>
       <motion.div
         variants={fadeUp}
         whileHover={hoverMotion}
         whileFocus={hoverMotion}
         transition={{ type: "spring", stiffness: 120, damping: 25 }}
       >
-        <Card className="border-border/70 bg-card/70">
+        <Card className="border-border/70 bg-card/70 transition-colors duration-200 hover:border-primary/30">
           <CardHeader className="space-y-2">
             {ctaContent.title ? <CardTitle className="text-2xl md:text-3xl">{ctaContent.title}</CardTitle> : null}
             {ctaContent.description ? <CardDescription className="text-sm md:text-base">{ctaContent.description}</CardDescription> : null}

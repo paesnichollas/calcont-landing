@@ -15,22 +15,22 @@ export type TeamContent = {
 };
 
 export const teamContent: TeamContent = {
-  title: "Time por cidade",
-  description: "Estrutura de equipe separada por unidade para facilitar manutencao dos dados.",
-  emptyStateLabel: "Equipe em atualizacao.",
+  title: "Equipe por cidade",
+  description: "Estrutura de equipe separada por unidade para facilitar a manutenção dos dados.",
+  emptyStateLabel: "Equipe em atualização.",
   cityLabels: {
-    maceio: "Maceio",
+    maceio: "Maceió",
     marechal: "Marechal"
   },
   members: [
-    { name: "Cleiton", role: "Gerencia", city: "maceio" },
-    { name: "Joeline", role: "Gerencia", city: "maceio" },
+    { name: "Cleiton", role: "Gerência", city: "maceio" },
+    { name: "Joeline", role: "Gerência", city: "maceio" },
     { name: "Niure", role: "Fiscal", city: "maceio" },
     { name: "Jurandir", role: "Trabalhista", city: "maceio" },
-    { name: "Edson", role: "Contabil", city: "maceio" },
-    { name: "Ruan", role: "Gerencia", city: "marechal" },
+    { name: "Edson", role: "Contábil", city: "maceio" },
+    { name: "Ruan", role: "Gerência", city: "marechal" },
     { name: "Antonio Carlos", role: "Fiscal", city: "marechal" },
     { name: "Stefani", role: "Trabalhista", city: "marechal" },
-    { name: "Edson", role: "Contabil", city: "marechal" }
+    { name: "Edson", role: "Contábil", city: "marechal" }
   ]
 };

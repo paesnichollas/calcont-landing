@@ -15,19 +15,19 @@ export type TestimonialsContent = {
 
 export const testimonialsContent: TestimonialsContent = {
   title: "Prova social",
-  description: "Placeholders para depoimentos em texto e video.",
-  videoLinkLabel: "Ver video",
+  description: "Placeholders para depoimentos em texto e vídeo.",
+  videoLinkLabel: "Ver vídeo",
   items: [
     {
       id: "dep-1",
       author: "Cliente Placeholder 1",
-      role: "Comercio",
-      text: "Atendimento consistente e apoio tecnico nas decisoes."
+      role: "Comércio",
+      text: "Atendimento consistente e apoio técnico nas decisões."
     },
     {
       id: "dep-2",
       author: "Cliente Placeholder 2",
-      role: "Servico",
+      role: "Serviço",
       videoUrl: "https://example.com/video-placeholder"
     }
   ]

@@ -9,12 +9,13 @@ const manrope = Manrope({
   variable: "--font-sans"
 });
 
-const DOMAIN = "https://calcont.com";
+const DOMAIN = "https://calcont.com.br";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const OG_IMAGE = "/og-image.png";
 const FAVICON = "/favicon.svg";
 
-const sharedDescription = "Direcionamento claro para clientes atuais e novos clientes, com atendimento consultivo e foco em conversão.";
+const sharedDescription =
+  "Direcionamento claro para clientes atuais e novos clientes, com atendimento consultivo e foco em conversão.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),

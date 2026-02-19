@@ -44,7 +44,7 @@ export function TeamByCitySection() {
                 animate={animateState}
                 className="w-full"
               >
-                <Card className="border-border/70 bg-card/70">
+                <Card className="border-border/70 bg-card/70 transition-colors duration-200 hover:border-primary/30">
                   <CardHeader>
                     <CardTitle className="text-lg">{teamContent.cityLabels[city]}</CardTitle>
                   </CardHeader>

@@ -11,8 +11,8 @@ export type NumbersContent = {
 };
 
 export const numbersContent: NumbersContent = {
-  title: "Autoridade em numeros",
-  description: "Indicadores institucionais para reforcar confianca e posicionamento corporativo.",
+  title: "Autoridade em números",
+  description: "Indicadores institucionais para reforçar confiança e posicionamento corporativo.",
   items: [
     { id: "anos", label: "Anos de empresa", value: "10 anos" },
     { id: "clientes", label: "Clientes ativos", value: "000+" },

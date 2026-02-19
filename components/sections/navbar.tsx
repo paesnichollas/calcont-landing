@@ -22,7 +22,7 @@ export function NavbarSection() {
   return (
     <header className="sticky top-0 z-20 border-b border-border/70 bg-background/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <Link href="/" className="text-lg font-semibold tracking-tight">
+        <Link href="#inicio" className="rounded-md text-lg font-semibold tracking-tight transition-colors hover:text-primary">
           {navbarContent.brand}
         </Link>
 
@@ -62,7 +62,7 @@ export function NavbarSection() {
             <a
               key={item.id}
               href={item.href}
-              className="shrink-0 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="shrink-0 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {item.label}
             </a>

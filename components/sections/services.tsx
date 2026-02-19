@@ -13,7 +13,7 @@ export function ServicesSection() {
   const items = servicesContent.items ?? [];
   const [activeServiceId, setActiveServiceId] = useState<string>("");
   const serviceIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
-  const { fadeUp } = useRevealMotion();
+  const { fadeUp, stagger } = useRevealMotion();
 
   useEffect(() => {
     function handleServiceSelected(event: Event) {
@@ -40,36 +40,38 @@ export function ServicesSection() {
       </div>
 
       {items.length > 0 ? (
-        <Accordion type="single" collapsible value={activeServiceId} onValueChange={setActiveServiceId} className="space-y-3">
-          {items.map((item, index) => (
-            <motion.div key={item.id} variants={fadeUp} transition={{ delay: index * 0.05 }}>
-              <Card className="border-border/70 bg-card/70 px-6">
-                <AccordionItem value={item.id} className="border-none">
-                  <AccordionTrigger className="hover:no-underline">
-                    <div className="space-y-1 text-left">
-                      {item.title ? <CardTitle className="text-lg">{item.title}</CardTitle> : null}
-                      {item.summary ? <CardDescription>{item.summary}</CardDescription> : null}
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-3">
-                      <p className="text-sm text-muted-foreground">{item.details || servicesContent.emptyStateLabel}</p>
-                      {item.highlights && item.highlights.length > 0 ? (
-                        <ul className="space-y-1">
-                          {item.highlights.map((highlight) => (
-                            <li key={`${item.id}-${highlight}`} className="text-sm text-foreground">
-                              {highlight}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Card>
-            </motion.div>
-          ))}
-        </Accordion>
+        <motion.div variants={stagger}>
+          <Accordion type="single" collapsible value={activeServiceId} onValueChange={setActiveServiceId} className="space-y-3">
+            {items.map((item) => (
+              <motion.div key={item.id} variants={fadeUp}>
+                <Card className="border-border/70 bg-card/70 px-6 transition-colors duration-200 hover:border-primary/30">
+                  <AccordionItem value={item.id} className="border-none">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="space-y-1 text-left">
+                        {item.title ? <CardTitle className="text-lg">{item.title}</CardTitle> : null}
+                        {item.summary ? <CardDescription>{item.summary}</CardDescription> : null}
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-3">
+                        <p className="text-sm text-muted-foreground">{item.details || servicesContent.emptyStateLabel}</p>
+                        {item.highlights && item.highlights.length > 0 ? (
+                          <ul className="space-y-1">
+                            {item.highlights.map((highlight) => (
+                              <li key={`${item.id}-${highlight}`} className="text-sm text-foreground">
+                                {highlight}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Card>
+              </motion.div>
+            ))}
+          </Accordion>
+        </motion.div>
       ) : null}
     </ScrollRevealSection>
   );

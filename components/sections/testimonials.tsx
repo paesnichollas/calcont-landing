@@ -27,7 +27,7 @@ export function TestimonialsSection() {
         <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2">
           {items.map((item) => (
             <motion.div key={item.id} variants={fadeUp}>
-              <Card className="border-border/70 bg-card/70">
+              <Card className="border-border/70 bg-card/70 transition-colors duration-200 hover:border-primary/30">
                 <CardHeader>
                   {item.author ? <CardTitle className="text-lg">{item.author}</CardTitle> : null}
                   {item.role ? <CardDescription>{item.role}</CardDescription> : null}
