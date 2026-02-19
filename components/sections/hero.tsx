@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -18,7 +19,15 @@ import { ScrollRevealSection } from "@/components/motion/scroll-reveal-section";
 import { useRevealMotion } from "@/components/motion/reveal";
 
 export function HeroSection() {
-  const { fadeUp, stagger } = useRevealMotion();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { fadeUp, stagger, shouldReduceMotion } = useRevealMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  const backgroundOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.05]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  const backgroundTranslateY = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const heroSlides = heroContent.heroSlides ?? [];
   const firstSlideId = heroSlides[0]?.id;
   const backgroundSrc = heroContent.heroBackgroundSrc || heroContent.heroImageSrc;
@@ -26,7 +35,19 @@ export function HeroSection() {
 
   return (
     <ScrollRevealSection id="inicio" className="relative isolate overflow-hidden border-b border-border/70" variants={stagger}>
-      <div className="absolute inset-0" aria-hidden>
+      <motion.div
+        className="absolute inset-0"
+        aria-hidden
+        style={
+          shouldReduceMotion
+            ? undefined
+            : {
+                opacity: backgroundOpacity,
+                scale: backgroundScale,
+                y: backgroundTranslateY
+              }
+        }
+      >
         <Image
           src={backgroundSrc}
           alt={backgroundAlt}
@@ -37,9 +58,9 @@ export function HeroSection() {
         />
         <div className="absolute inset-0 bg-background/75" />
         <div className="absolute inset-0 bg-hero-vignette" />
-      </div>
+      </motion.div>
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16">
+      <div ref={heroRef} className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16">
         <div className="pointer-events-none absolute left-1/2 top-2 h-64 w-64 -translate-x-1/2 rounded-full bg-hero-glow blur-3xl md:top-0 md:h-80 md:w-80" />
 
         <div className="relative grid gap-6 md:grid-cols-2 md:items-center">

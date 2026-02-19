@@ -9,6 +9,7 @@ import { ServicesSection } from "@/components/sections/services";
 import { SignatureBandSection } from "@/components/sections/signature-band";
 import { TeamByCitySection } from "@/components/sections/team-by-city";
 import { TestimonialsSection } from "@/components/sections/testimonials";
+import { BackToTopButton } from "@/components/ui/back-to-top";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
         <CtaSection />
       </main>
       <FooterSection />
+      <BackToTopButton />
     </div>
   );
 }
