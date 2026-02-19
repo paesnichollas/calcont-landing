@@ -8,17 +8,12 @@ declare global {
   }
 }
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+export const isAnalyticsEnabled = Boolean(GA_ID);
+
 export function trackEvent(eventName: AnalyticsEventName, params?: EventParams) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  if (!gaId) {
-    return;
-  }
-
-  if (typeof window.gtag !== "function") {
+  if (typeof window === "undefined" || !GA_ID || typeof window.gtag !== "function") {
     return;
   }
 
