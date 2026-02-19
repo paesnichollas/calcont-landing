@@ -77,4 +77,10 @@
   .bg-hero-glow {
     background: radial-gradient(circle, hsl(var(--primary) / 0.2) 0%, hsl(var(--primary) / 0) 70%);
   }
+
+  .bg-hero-vignette {
+    background:
+      radial-gradient(circle at 75% 20%, hsl(var(--primary) / 0.24) 0%, hsl(var(--primary) / 0) 45%),
+      linear-gradient(180deg, hsl(var(--background) / 0.52) 0%, hsl(var(--background) / 0.84) 100%);
+  }
 }

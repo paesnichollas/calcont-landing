@@ -15,20 +15,27 @@ export type TestimonialsContent = {
 
 export const testimonialsContent: TestimonialsContent = {
   title: "Prova social",
-  description: "Placeholders para depoimentos em texto e vídeo.",
-  videoLinkLabel: "Ver vídeo",
+  description: "Depoimentos em texto e video para reforcar confianca.",
+  videoLinkLabel: "Ver video",
   items: [
     {
       id: "dep-1",
       author: "Cliente Placeholder 1",
-      role: "Comércio",
-      text: "Atendimento consistente e apoio técnico nas decisões."
+      role: "Comercio",
+      text: "Atendimento consistente e apoio tecnico para decisoes importantes."
     },
     {
       id: "dep-2",
       author: "Cliente Placeholder 2",
-      role: "Serviço",
+      role: "Servico",
+      text: "A equipe trouxe mais previsibilidade para nossa rotina fiscal.",
       videoUrl: "https://example.com/video-placeholder"
+    },
+    {
+      id: "dep-3",
+      author: "Cliente Placeholder 3",
+      role: "Industria",
+      text: "Com orientacao clara, conseguimos organizar processos internos com mais seguranca."
     }
   ]
 };

@@ -4,6 +4,12 @@ export type NavigationItem = {
   href: string;
 };
 
+export type HeroSlide = {
+  id: string;
+  src: string;
+  alt: string;
+};
+
 export type HeroContent = {
   eyebrow: string;
   title: string;
@@ -13,6 +19,9 @@ export type HeroContent = {
   tertiaryCtaLabel: string;
   heroImageSrc: string;
   heroImageAlt: string;
+  heroBackgroundSrc: string;
+  heroBackgroundAlt: string;
+  heroSlides: HeroSlide[];
 };
 
 export type CtaContent = {
@@ -37,34 +46,44 @@ export const navbarContent: {
 } = {
   brand: "Calcont",
   navigation: [
-    { id: "services-menu", label: "Serviços", href: "#servicos" },
-    { id: "inicio", label: "Início", href: "#inicio" },
+    { id: "services-menu", label: "Servicos", href: "#servicos" },
+    { id: "inicio", label: "Inicio", href: "#inicio" },
+    { id: "assinatura", label: "Assinatura", href: "#assinatura" },
+    { id: "destaques", label: "Destaques", href: "#destaques" },
     { id: "equipe", label: "Equipe", href: "#equipe" },
-    { id: "numeros", label: "Números", href: "#numeros" },
+    { id: "numeros", label: "Numeros", href: "#numeros" },
+    { id: "galeria", label: "Galeria", href: "#galeria" },
     { id: "depoimentos", label: "Depoimentos", href: "#depoimentos" },
     { id: "contato", label: "Contato", href: "#contato" }
   ],
-  actionLabel: "Já sou cliente",
-  servicesMenuLabel: "Serviços",
-  servicesMenuHint: "Escolha um serviço para abrir o detalhe"
+  actionLabel: "Ja sou cliente",
+  servicesMenuLabel: "Servicos",
+  servicesMenuHint: "Escolha um servico para abrir o detalhe"
 };
 
 export const heroContent: HeroContent = {
-  eyebrow: "Contabilidade corporativa para decisão e crescimento",
-  title: "Calcont: estrutura contábil estratégica para empresas que querem escalar",
-  description: "Direcionamento claro para clientes atuais e novos clientes, com atendimento consultivo e foco em conversão.",
-  primaryCtaLabel: "Já sou cliente",
-  secondaryCtaLabel: "Ainda não sou cliente",
+  eyebrow: "Contabilidade corporativa para decisao e crescimento",
+  title: "Calcont: estrutura contabil estrategica para empresas que querem escalar",
+  description: "Direcionamento claro para clientes atuais e novos clientes, com atendimento consultivo e foco em conversao.",
+  primaryCtaLabel: "Ja sou cliente",
+  secondaryCtaLabel: "Ainda nao sou cliente",
   tertiaryCtaLabel: "Falar no WhatsApp",
-  heroImageSrc: "/hero-placeholder.svg",
-  heroImageAlt: "Ilustração institucional da Calcont"
+  heroImageSrc: "/hero-slide-1.svg",
+  heroImageAlt: "Imagem institucional da Calcont",
+  heroBackgroundSrc: "/hero-bg-placeholder.svg",
+  heroBackgroundAlt: "Fundo institucional da Calcont",
+  heroSlides: [
+    { id: "hero-slide-1", src: "/hero-slide-1.svg", alt: "Time da Calcont em reuniao" },
+    { id: "hero-slide-2", src: "/hero-slide-2.svg", alt: "Analise financeira em andamento" },
+    { id: "hero-slide-3", src: "/hero-slide-3.svg", alt: "Atendimento consultivo com cliente" }
+  ]
 };
 
 export const ctaContent: CtaContent = {
-  title: "Pronto para avançar com apoio contábil estratégico?",
-  description: "Escolha o fluxo ideal: acesso ao portal, cadastro de novo cliente ou contato rápido no WhatsApp.",
-  primaryCtaLabel: "Já sou cliente",
-  secondaryCtaLabel: "Ainda não sou cliente",
+  title: "Pronto para avancar com apoio contabil estrategico?",
+  description: "Escolha o fluxo ideal: acesso ao portal, cadastro de novo cliente ou contato rapido no WhatsApp.",
+  primaryCtaLabel: "Ja sou cliente",
+  secondaryCtaLabel: "Ainda nao sou cliente",
   tertiaryCtaLabel: "Falar no WhatsApp"
 };
 

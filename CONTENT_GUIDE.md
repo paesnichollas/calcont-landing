@@ -1,59 +1,87 @@
 # Weekly content guide
 
-All editable copy and links live under `content/*.ts`. Update those files once per week as instructed by Caio, and then reload the landing page to confirm the UI still renders without missing pieces. The sections below map each file to the UI component it drives, plus the built-in fallbacks.
+All editable copy and image references live under `content/*.ts`. Update those files and reload the page to confirm the UI still renders safely.
 
-## Hero, CTA & footer (landing.ts)
+## Hero, CTA, footer and navbar (`content/landing.ts`)
 
-- **`heroContent`** – controls the eyebrow, headline, description, CTA labels, and hero illustration. Keep `heroImageSrc` pointed at a real brand photo; if the photography isn't ready, leave a placeholder image URL and update `heroImageAlt` for accessibility.
-- **`ctaContent`** – feeds the final section’s title, description, and all three CTAs. CTA labels can be customized to match the week’s offer, but avoid empty strings (buttons render even when the text is blank).
-- **`footerContent`** – brand/legal text beneath the page.
-- **`navbarContent`** – brand name, navigation links (IDs link to section anchors), action label, and the services menu hint text. Adjust the `navigation` array if you add/rename sections; IDs must match the target section `id`.
+- `heroContent` controls eyebrow, headline, description, CTA labels, hero background image, and hero carousel slides.
+- `ctaContent` controls the final CTA section copy.
+- `footerContent` controls brand/legal copy.
+- `navbarContent.navigation` controls section anchors. IDs must match section `id` attributes.
 
-Fallbacks: every field is optional at render time, so missing copy simply removes the `<p>`/`<h2>` node rather than breaking the layout. The CTA buttons are always rendered even if their labels are empty, so keep them populated for clarity.
+Fallback behavior:
+- Empty text fields are skipped in render.
+- `heroSlides` empty array falls back to `heroImageSrc`.
 
-## Services (services.ts)
+## Signature band (`content/signature.ts`)
 
-- **`badge`, `title`, `description`** – headline text above the accordion.
-- **`items`** – each entry represents an accordion card.
-  * `id` – must stay unique (used by the dropdown menu + collapse state).
-  * `title`/`summary` – always shown.
-  * `details` – optional; falls back to `emptyStateLabel`.
-  * `highlights` – array of strings rendered as list bullets; omit if there are none.
+- `text`: short brand sentence in the red signature band.
+- `ctaLabel`: button label.
+- `ctaTarget`: `"whatsapp"` or `"portal_login"`.
 
-Add/remove items freely; the UI simply renders whatever is present. Removing all items hides the accordion completely (nothing breaks). Use `emptyStateLabel` for the fallback paragraph when `details` are missing.
+Fallback behavior:
+- If both `text` and `ctaLabel` are empty, the section is hidden.
 
-## Team by city (team.ts)
+## Highlights carousel (`content/highlights.ts`)
 
-- `title`, `description`, `emptyStateLabel` – headline copy.
-- `cityLabels` – displayed on the tab triggers and inside each card header. Keep the keys aligned to the `TeamCity` union.
-- `members` – each person needs `name`, `role`, and `city` (`"maceio"` or `"marechal"`). Add as many cards as necessary; the active tab filters by city.
+- `title` and `description` control section heading.
+- `items` contains cards with `title`, `description`, `icon`, optional `emphasis`.
+- `icon` must match one of the mapped Lucide names in the section component.
 
-Removing all members for a city shows the `emptyStateLabel` message. No further action needed.
+Fallback behavior:
+- Empty `items` hides the section.
 
-## Numbers (numbers.ts)
+## Gallery carousel (`content/gallery.ts`)
 
-- `title`/`description` – section headline.
-- `items` – each stat needs an `id`, `label`, and `value`. The cards render whenever the array contains entries; clearing the array hides the grid entirely.
+- `title` and `description` control section heading.
+- `items` contains `src`, `alt`, and `label` for each image card.
 
-Keep values rounded or abbreviated as desired (e.g., `12 anos`, `000+`). Labels appear in uppercase.
+Fallback behavior:
+- Empty `items` hides the section.
+- Empty `label` hides overlay text.
+- Empty `alt` falls back to a generic alt string.
 
-## Testimonials (testimonials.ts)
+## Services (`content/services.ts`)
 
-- `title`, `description`, `videoLinkLabel` – headings.
-- `items` – `author`, `role`, optional `text`, optional `videoUrl`. You can supply a video link instead of text or both; empty fields are simply skipped.
+- `badge`, `title`, `description` control heading text.
+- `items` powers the accordion cards.
+- `id` must remain unique (also used by navbar services menu selection).
 
-When replacing testimonials, remove an entry and refresh to ensure the grid keeps flowing (empty arrays hide the section).
+Fallback behavior:
+- Empty `details` uses `emptyStateLabel`.
+- Empty `items` hides the section.
 
-## Links (links.ts)
+## Team (`content/team.ts`)
 
-- `clientPortalLoginUrl`, `clientPortalSignupUrl`, `whatsappUrl` – used by the CTA buttons and navbar action. Update them whenever the Onvio or WhatsApp URLs change.
+- `title`, `description`, `cityLabels`, `members`, `emptyStateLabel` control the tabbed city section.
 
-## Verifying after updates (weekly checklist)
+Fallback behavior:
+- Empty city member list shows `emptyStateLabel`.
 
-1. Update one content file (e.g., remove a service or change a testimonial) and reload the page to ensure nothing crashes and the agreed empty states appear.
-2. Confirm the tabs still switch cities when team members change; missing text just hides the paragraph.
-3. Delete all numbers/statistics temporarily to make sure the grid hides cleanly.
-4. Change CTA labels in `landing.ts` and ensure the buttons still render.
-5. Validate external links (Onvio/WhatsApp) in `content/links.ts` by clicking a CTA in the UI.
+## Numbers (`content/numbers.ts`)
 
-Maintaining this doc ensures Caio knows exactly which file to edit for each weekly update while the UI keeps rendering safely even when fields are omitted.
+- `title`, `description`, `items` control the stat cards.
+
+Fallback behavior:
+- Empty `items` hides the section.
+
+## Testimonials (`content/testimonials.ts`)
+
+- `title`, `description`, `videoLinkLabel`, `items` control testimonial carousel cards.
+- Each item can have `text`, `videoUrl`, or both.
+
+Fallback behavior:
+- Empty `items` hides the section.
+- Empty `videoUrl` hides the video button.
+
+## Links (`content/links.ts`)
+
+- `clientPortalLoginUrl`, `clientPortalSignupUrl`, `whatsappUrl` are consumed by all CTAs.
+
+## Quick weekly verification
+
+1. Edit one field in each touched file and reload the page.
+2. Confirm navbar anchors still point to visible sections.
+3. Confirm hero and gallery images render without layout jumps.
+4. Confirm CTA links open correctly.
+5. Confirm sections hide cleanly when arrays are emptied.

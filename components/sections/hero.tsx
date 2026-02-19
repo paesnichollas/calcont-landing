@@ -3,6 +3,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { heroContent } from "@/content/landing";
 import { siteLinks } from "@/content/links";
@@ -12,27 +19,37 @@ import { useRevealMotion } from "@/components/motion/reveal";
 
 export function HeroSection() {
   const { fadeUp, stagger } = useRevealMotion();
+  const heroSlides = heroContent.heroSlides ?? [];
+  const firstSlideId = heroSlides[0]?.id;
+  const backgroundSrc = heroContent.heroBackgroundSrc || heroContent.heroImageSrc;
+  const backgroundAlt = heroContent.heroBackgroundAlt || heroContent.heroImageAlt;
 
   return (
-    <ScrollRevealSection
-      id="inicio"
-      className="mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16"
-      variants={stagger}
-    >
-      <div className="relative">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-2 h-64 w-64 -translate-x-1/2 rounded-full bg-hero-glow blur-3xl md:top-0 md:h-80 md:w-80"
+    <ScrollRevealSection id="inicio" className="relative isolate overflow-hidden border-b border-border/70" variants={stagger}>
+      <div className="absolute inset-0" aria-hidden>
+        <Image
+          src={backgroundSrc}
+          alt={backgroundAlt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
+        <div className="absolute inset-0 bg-background/75" />
+        <div className="absolute inset-0 bg-hero-vignette" />
+      </div>
+
+      <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16">
+        <div className="pointer-events-none absolute left-1/2 top-2 h-64 w-64 -translate-x-1/2 rounded-full bg-hero-glow blur-3xl md:top-0 md:h-80 md:w-80" />
 
         <div className="relative grid gap-6 md:grid-cols-2 md:items-center">
           <motion.div variants={fadeUp}>
-            <Card className="border-border/70 bg-card/75 transition-colors duration-200 hover:border-primary/30">
+            <Card className="border-border/60 bg-card/80 backdrop-blur-sm transition-colors duration-200 hover:border-primary/35 supports-[backdrop-filter]:bg-card/65">
               <CardHeader className="space-y-4">
                 {heroContent.eyebrow ? (
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">{heroContent.eyebrow}</p>
                 ) : null}
-                {heroContent.title ? <CardTitle className="text-2xl md:text-4xl">{heroContent.title}</CardTitle> : null}
+                {heroContent.title ? <CardTitle className="text-2xl leading-tight md:text-4xl">{heroContent.title}</CardTitle> : null}
                 {heroContent.description ? (
                   <CardDescription className="text-sm md:text-base">{heroContent.description}</CardDescription>
                 ) : null}
@@ -73,15 +90,45 @@ export function HeroSection() {
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <div className="relative overflow-hidden rounded-xl border border-border/70 bg-card/65 p-3 transition-colors duration-200 hover:border-primary/30">
-              <Image
-                src={heroContent.heroImageSrc}
-                alt={heroContent.heroImageAlt}
-                width={960}
-                height={720}
-                priority
-                className="h-auto w-full rounded-lg object-cover"
-              />
+            <div className="relative overflow-hidden rounded-xl border border-border/60 bg-card/80 p-3 backdrop-blur-sm transition-colors duration-200 hover:border-primary/35 supports-[backdrop-filter]:bg-card/65">
+              {heroSlides.length > 0 ? (
+                <Carousel opts={{ align: "start", loop: false }} className="w-full">
+                  <CarouselContent className="-ml-0">
+                    {heroSlides.map((slide) => (
+                      <CarouselItem key={slide.id} className="pl-0">
+                        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+                          <Image
+                            src={slide.src}
+                            alt={slide.alt}
+                            fill
+                            sizes="(min-width: 768px) 42vw, 92vw"
+                            priority={slide.id === firstSlideId}
+                            className="object-cover"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+
+                  {heroSlides.length > 1 ? (
+                    <>
+                      <CarouselPrevious className="left-3 top-auto bottom-3 h-9 w-9 translate-y-0" />
+                      <CarouselNext className="left-14 right-auto top-auto bottom-3 h-9 w-9 translate-y-0" />
+                    </>
+                  ) : null}
+                </Carousel>
+              ) : (
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+                  <Image
+                    src={heroContent.heroImageSrc}
+                    alt={heroContent.heroImageAlt}
+                    fill
+                    sizes="(min-width: 768px) 42vw, 92vw"
+                    priority
+                    className="object-cover"
+                  />
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
