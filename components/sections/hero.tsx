@@ -34,9 +34,9 @@ export function HeroSection() {
   const backgroundAlt = heroContent.heroBackgroundAlt || heroContent.heroImageAlt;
 
   return (
-    <ScrollRevealSection id="inicio" className="relative isolate overflow-hidden border-b border-border/70" variants={stagger}>
+    <ScrollRevealSection id="inicio" className="relative isolate overflow-x-clip border-b border-border/70" variants={stagger}>
       <motion.div
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-x-0 -top-8 -bottom-24 z-0 md:-bottom-36"
         aria-hidden
         style={
           shouldReduceMotion
@@ -58,9 +58,10 @@ export function HeroSection() {
         />
         <div className="absolute inset-0 bg-background/75" />
         <div className="absolute inset-0 bg-hero-vignette" />
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent to-background md:h-48" />
       </motion.div>
 
-      <div ref={heroRef} className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16">
+      <div ref={heroRef} className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-16 md:pt-16">
         <div className="pointer-events-none absolute left-1/2 top-2 h-64 w-64 -translate-x-1/2 rounded-full bg-hero-glow blur-3xl md:top-0 md:h-80 md:w-80" />
 
         <div className="relative grid gap-6 md:grid-cols-2 md:items-center">

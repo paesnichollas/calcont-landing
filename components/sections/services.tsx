@@ -19,7 +19,7 @@ import { useRevealMotion } from "@/components/motion/reveal";
 
 export function ServicesSection() {
   const items = servicesContent.items ?? [];
-  const [activeServiceId, setActiveServiceId] = useState<string>("");
+  const [openServiceId, setOpenServiceId] = useState<string>("");
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const { fadeUp, stagger } = useRevealMotion();
   const serviceIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
@@ -30,7 +30,7 @@ export function ServicesSection() {
       const customEvent = event as CustomEvent<ServiceSelectedDetail>;
       const serviceId = customEvent.detail?.serviceId;
       if (serviceId && serviceIds.has(serviceId)) {
-        setActiveServiceId(serviceId);
+        setOpenServiceId(serviceId);
       }
     }
 
@@ -42,29 +42,82 @@ export function ServicesSection() {
   }, [serviceIds]);
 
   useEffect(() => {
-    if (!carouselApi || !activeServiceId) {
+    if (!carouselApi || !openServiceId) {
       return;
     }
 
-    const targetIndex = serviceIndexById.get(activeServiceId);
+    const targetIndex = serviceIndexById.get(openServiceId);
     if (typeof targetIndex !== "number") {
       return;
     }
 
-    carouselApi.scrollTo(targetIndex);
-  }, [activeServiceId, carouselApi, serviceIndexById]);
+    if (targetIndex !== carouselApi.selectedScrollSnap()) {
+      carouselApi.scrollTo(targetIndex);
+    }
+  }, [carouselApi, openServiceId, serviceIndexById]);
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+
+    function handleSlideChange() {
+      if (!openServiceId) {
+        return;
+      }
+
+      const selectedIndex = carouselApi.selectedScrollSnap();
+      const selectedServiceId = items[selectedIndex]?.id ?? "";
+      if (selectedServiceId !== openServiceId) {
+        setOpenServiceId("");
+      }
+    }
+
+    carouselApi.on("select", handleSlideChange);
+    carouselApi.on("reInit", handleSlideChange);
+
+    return () => {
+      carouselApi.off("select", handleSlideChange);
+      carouselApi.off("reInit", handleSlideChange);
+    };
+  }, [carouselApi, items, openServiceId]);
 
   function handleServiceValueChange(nextValue: string) {
-    setActiveServiceId(nextValue);
+    setOpenServiceId(nextValue);
 
     if (!carouselApi || !nextValue) {
       return;
     }
 
     const targetIndex = serviceIndexById.get(nextValue);
-    if (typeof targetIndex === "number") {
+    if (typeof targetIndex === "number" && targetIndex !== carouselApi.selectedScrollSnap()) {
       carouselApi.scrollTo(targetIndex);
     }
+  }
+
+  function resetAccordionAndNavigate(navigate: (() => void) | undefined) {
+    setOpenServiceId("");
+
+    if (!navigate) {
+      return;
+    }
+
+    if (typeof window === "undefined") {
+      navigate();
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      navigate();
+    });
+  }
+
+  function handlePreviousSlide() {
+    resetAccordionAndNavigate(() => carouselApi?.scrollPrev());
+  }
+
+  function handleNextSlide() {
+    resetAccordionAndNavigate(() => carouselApi?.scrollNext());
   }
 
   return (
@@ -77,7 +130,7 @@ export function ServicesSection() {
 
       {items.length > 0 ? (
         <motion.div variants={fadeUp} className="relative">
-          <Accordion type="single" collapsible value={activeServiceId} onValueChange={handleServiceValueChange}>
+          <Accordion type="single" collapsible value={openServiceId} onValueChange={handleServiceValueChange}>
             <Carousel opts={{ align: "start", loop: false }} setApi={setCarouselApi} className="w-full">
               <CarouselContent className="-ml-0">
                 {items.map((item) => (
@@ -112,8 +165,14 @@ export function ServicesSection() {
 
               {items.length > 1 ? (
                 <div className="mt-4 flex items-center justify-end gap-2">
-                  <CarouselPrevious className="static left-auto right-auto top-auto h-9 w-9 translate-x-0 translate-y-0" />
-                  <CarouselNext className="static left-auto right-auto top-auto h-9 w-9 translate-x-0 translate-y-0" />
+                  <CarouselPrevious
+                    className="static left-auto right-auto top-auto h-9 w-9 translate-x-0 translate-y-0"
+                    onClick={handlePreviousSlide}
+                  />
+                  <CarouselNext
+                    className="static left-auto right-auto top-auto h-9 w-9 translate-x-0 translate-y-0"
+                    onClick={handleNextSlide}
+                  />
                 </div>
               ) : null}
             </Carousel>
