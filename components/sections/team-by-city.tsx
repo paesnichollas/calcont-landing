@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teamContent, type TeamCity } from "@/content/team";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function getMembersByCity(city: TeamCity) {
   return teamContent.members.filter((member) => member.city === city);
@@ -16,41 +17,50 @@ export function TeamByCitySection() {
         {teamContent.description ? <p className="max-w-2xl text-sm text-muted-foreground md:text-base">{teamContent.description}</p> : null}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card className="border-border/70 bg-card/70">
-          <CardHeader>
-            <CardTitle className="text-lg">{teamContent.cityLabels.maceio}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {maceioTeam.length > 0 ? (
-              maceioTeam.map((member) => (
-                <p key={`${member.city}-${member.name}-${member.role}`} className="text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">{member.name}</span> - {member.role}
-                </p>
-              ))
-            ) : (
-              <p className="text-sm text-muted-foreground">{teamContent.emptyStateLabel}</p>
-            )}
-          </CardContent>
-        </Card>
+      <Tabs defaultValue="maceio" className="w-full">
+        <TabsList className="grid h-auto w-full grid-cols-2">
+          <TabsTrigger value="maceio">{teamContent.cityLabels.maceio}</TabsTrigger>
+          <TabsTrigger value="marechal">{teamContent.cityLabels.marechal}</TabsTrigger>
+        </TabsList>
 
-        <Card className="border-border/70 bg-card/70">
-          <CardHeader>
-            <CardTitle className="text-lg">{teamContent.cityLabels.marechal}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {marechalTeam.length > 0 ? (
-              marechalTeam.map((member) => (
-                <p key={`${member.city}-${member.name}-${member.role}`} className="text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">{member.name}</span> - {member.role}
-                </p>
-              ))
-            ) : (
-              <p className="text-sm text-muted-foreground">{teamContent.emptyStateLabel}</p>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+        <TabsContent value="maceio">
+          <Card className="border-border/70 bg-card/70">
+            <CardHeader>
+              <CardTitle className="text-lg">{teamContent.cityLabels.maceio}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {maceioTeam.length > 0 ? (
+                maceioTeam.map((member) => (
+                  <p key={`${member.city}-${member.name}-${member.role}`} className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">{member.name}</span> - {member.role}
+                  </p>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">{teamContent.emptyStateLabel}</p>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="marechal">
+          <Card className="border-border/70 bg-card/70">
+            <CardHeader>
+              <CardTitle className="text-lg">{teamContent.cityLabels.marechal}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {marechalTeam.length > 0 ? (
+                marechalTeam.map((member) => (
+                  <p key={`${member.city}-${member.name}-${member.role}`} className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">{member.name}</span> - {member.role}
+                  </p>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">{teamContent.emptyStateLabel}</p>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </section>
   );
 }

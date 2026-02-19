@@ -1,9 +1,11 @@
 export type SiteLinks = {
-  onvio: string;
-  whatsapp: string;
+  clientPortalLoginUrl: string;
+  clientPortalSignupUrl: string;
+  whatsappUrl: string;
 };
 
 export const siteLinks: SiteLinks = {
-  onvio: "https://www.onvio.com.br/",
-  whatsapp: "https://wa.me/5500000000000"
+  clientPortalLoginUrl: "https://www.onvio.com.br/",
+  clientPortalSignupUrl: "https://www.onvio.com.br/",
+  whatsappUrl: "https://wa.me/5500000000000"
 };

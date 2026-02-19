@@ -12,9 +12,9 @@ export type NumbersContent = {
 
 export const numbersContent: NumbersContent = {
   title: "Autoridade em numeros",
-  description: "Dados institucionais iniciais para validar a secao e facilitar trocas semanais.",
+  description: "Indicadores institucionais para reforcar confianca e posicionamento corporativo.",
   items: [
-    { id: "anos", label: "Anos de empresa", value: "10+" },
+    { id: "anos", label: "Anos de empresa", value: "10 anos" },
     { id: "clientes", label: "Clientes ativos", value: "000+" },
     { id: "cidades", label: "Cidades atendidas", value: "02" }
   ]

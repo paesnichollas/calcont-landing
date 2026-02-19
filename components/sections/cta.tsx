@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ctaContent } from "@/content/landing";
 import { siteLinks } from "@/content/links";
+import { trackEvent } from "@/lib/analytics";
 
 export function CtaSection() {
   return (
@@ -13,13 +16,33 @@ export function CtaSection() {
         </CardHeader>
         <CardContent className="flex flex-col gap-3 sm:flex-row">
           <Button asChild className="w-full sm:w-auto">
-            <a href={siteLinks.onvio} target="_blank" rel="noreferrer">
+            <a
+              href={siteLinks.clientPortalLoginUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("click_ja_sou_cliente", { source: "cta" })}
+            >
               {ctaContent.primaryCtaLabel}
             </a>
           </Button>
           <Button asChild variant="secondary" className="w-full sm:w-auto">
-            <a href={siteLinks.whatsapp} target="_blank" rel="noreferrer">
+            <a
+              href={siteLinks.clientPortalSignupUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("click_ainda_nao_sou_cliente", { source: "cta" })}
+            >
               {ctaContent.secondaryCtaLabel}
+            </a>
+          </Button>
+          <Button asChild variant="ghost" className="w-full sm:w-auto">
+            <a
+              href={siteLinks.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("click_whatsapp", { source: "cta" })}
+            >
+              {ctaContent.tertiaryCtaLabel}
             </a>
           </Button>
         </CardContent>

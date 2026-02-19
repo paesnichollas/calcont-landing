@@ -1,8 +1,31 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { servicesContent } from "@/content/services";
+import { SERVICE_SELECTED_EVENT, type ServiceSelectedDetail } from "@/lib/service-selection";
 
 export function ServicesSection() {
   const items = servicesContent.items ?? [];
+  const [activeServiceId, setActiveServiceId] = useState<string>("");
+  const serviceIds = useMemo(() => new Set(items.map((item) => item.id)), [items]);
+
+  useEffect(() => {
+    function handleServiceSelected(event: Event) {
+      const customEvent = event as CustomEvent<ServiceSelectedDetail>;
+      const serviceId = customEvent.detail?.serviceId;
+      if (serviceId && serviceIds.has(serviceId)) {
+        setActiveServiceId(serviceId);
+      }
+    }
+
+    window.addEventListener(SERVICE_SELECTED_EVENT, handleServiceSelected);
+
+    return () => {
+      window.removeEventListener(SERVICE_SELECTED_EVENT, handleServiceSelected);
+    };
+  }, [serviceIds]);
 
   return (
     <section id="servicos" className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6 md:py-16">
@@ -13,21 +36,34 @@ export function ServicesSection() {
       </div>
 
       {items.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Accordion type="single" collapsible value={activeServiceId} onValueChange={setActiveServiceId} className="space-y-3">
           {items.map((item) => (
-            <Card key={item.id} className="border-border/70 bg-card/70">
-              <CardHeader className="space-y-2">
-                {item.title ? <CardTitle className="text-lg">{item.title}</CardTitle> : null}
-                {item.summary ? <CardDescription>{item.summary}</CardDescription> : null}
-              </CardHeader>
-              {item.details ? (
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{item.details}</p>
-                </CardContent>
-              ) : null}
+            <Card key={item.id} className="border-border/70 bg-card/70 px-6">
+              <AccordionItem value={item.id} className="border-none">
+                <AccordionTrigger className="hover:no-underline">
+                  <div className="space-y-1 text-left">
+                    {item.title ? <CardTitle className="text-lg">{item.title}</CardTitle> : null}
+                    {item.summary ? <CardDescription>{item.summary}</CardDescription> : null}
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground">{item.details || servicesContent.emptyStateLabel}</p>
+                    {item.highlights && item.highlights.length > 0 ? (
+                      <ul className="space-y-1">
+                        {item.highlights.map((highlight) => (
+                          <li key={`${item.id}-${highlight}`} className="text-sm text-foreground">
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             </Card>
           ))}
-        </div>
+        </Accordion>
       ) : null}
     </section>
   );

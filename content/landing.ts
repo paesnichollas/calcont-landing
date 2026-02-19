@@ -10,6 +10,7 @@ export type HeroContent = {
   description: string;
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
+  tertiaryCtaLabel: string;
   heroImageSrc: string;
   heroImageAlt: string;
 };
@@ -19,6 +20,7 @@ export type CtaContent = {
   description: string;
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
+  tertiaryCtaLabel: string;
 };
 
 export type FooterContent = {
@@ -30,33 +32,38 @@ export const navbarContent: {
   brand: string;
   navigation: NavigationItem[];
   actionLabel: string;
+  servicesMenuLabel: string;
+  servicesMenuHint: string;
 } = {
   brand: "Calcont",
   navigation: [
-    { id: "servicos", label: "Servicos", href: "#servicos" },
+    { id: "services-menu", label: "Servicos", href: "#servicos" },
     { id: "equipe", label: "Equipe", href: "#equipe" },
     { id: "numeros", label: "Numeros", href: "#numeros" },
     { id: "depoimentos", label: "Depoimentos", href: "#depoimentos" }
   ],
-  actionLabel: "Ja sou cliente"
+  actionLabel: "Ja sou cliente",
+  servicesMenuLabel: "Servicos",
+  servicesMenuHint: "Escolha um servico para abrir o detalhe"
 };
 
 export const heroContent: HeroContent = {
-  eyebrow: "Contabilidade consultiva para crescimento real",
-  title: "Landing Calcont em construcao com base escalavel",
-  description:
-    "Estrutura inicial pronta para receber conteudo semanal, com performance mobile e arquitetura orientada a conversao.",
+  eyebrow: "Contabilidade corporativa para decisao e crescimento",
+  title: "Calcont: estrutura contabil estrategica para empresas que querem escalar",
+  description: "Direcionamento claro para clientes atuais e novos clientes, com atendimento consultivo e foco em conversao.",
   primaryCtaLabel: "Ja sou cliente",
   secondaryCtaLabel: "Ainda nao sou cliente",
+  tertiaryCtaLabel: "Falar no WhatsApp",
   heroImageSrc: "/hero-placeholder.svg",
   heroImageAlt: "Ilustracao institucional da Calcont"
 };
 
 export const ctaContent: CtaContent = {
   title: "Pronto para avancar com apoio contabil estrategico?",
-  description: "Use os botoes abaixo para seguir para atendimento ou para o portal de clientes.",
+  description: "Escolha o fluxo ideal: acesso ao portal, cadastro de novo cliente ou contato rapido no WhatsApp.",
   primaryCtaLabel: "Ja sou cliente",
-  secondaryCtaLabel: "Ainda nao sou cliente"
+  secondaryCtaLabel: "Ainda nao sou cliente",
+  tertiaryCtaLabel: "Falar no WhatsApp"
 };
 
 export const footerContent: FooterContent = {
