@@ -53,10 +53,17 @@ Fallback behavior:
 
 ## Team (`content/team.ts`)
 
-- `title`, `description`, `cityLabels`, `members`, `emptyStateLabel` control the tabbed city section.
+- `title`, `description`, `cityLabels`, `cityHighlights` control section heading and city selectors.
+- `membersByCity` controls the team card carousel per city.
+- Each member supports `name`, `role`, `description`, `imageSrc`, `imageAlt`, and `clientBenefits`.
+- `emptyStateLabelNoCity` appears before selecting a city.
+- `emptyStateLabelCityWithoutMembers` appears when a selected city has no members.
+- `fallbackDescription`, `fallbackImageSrc`, `fallbackBenefits`, and `benefitsTitle` control card fallbacks and benefit block.
 
 Fallback behavior:
-- Empty city member list shows `emptyStateLabel`.
+- No selected city shows `emptyStateLabelNoCity`.
+- Empty city member list shows `emptyStateLabelCityWithoutMembers`.
+- Empty member fields use fallback values from the same file.
 
 ## Numbers (`content/numbers.ts`)
 
