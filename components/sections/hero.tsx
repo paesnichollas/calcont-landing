@@ -1,11 +1,12 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -55,6 +56,9 @@ function renderTitleWithEmphasis(title: string, keywords: string[]): ReactNode {
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const heroCarouselResumeTimeoutRef = useRef<number | null>(null);
+  const [heroCarouselApi, setHeroCarouselApi] = useState<CarouselApi | undefined>(undefined);
+  const [isHeroCarouselAutoplayActive, setIsHeroCarouselAutoplayActive] = useState(true);
   const { fadeUp, stagger, shouldReduceMotion } = useRevealMotion();
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -82,6 +86,42 @@ export function HeroSection() {
   const fallbackTitleEmphasisKeywords = normalizeCopyItems(heroContent.titleEmphasisKeywords);
   const titleEmphasisKeywords = copyTitleEmphasisKeywords.length > 0 ? copyTitleEmphasisKeywords : fallbackTitleEmphasisKeywords;
   const socialProof = heroCopy.socialProof.trim() || heroContent.socialProof;
+  const handleHeroCarouselInteraction = () => {
+    setIsHeroCarouselAutoplayActive(false);
+
+    if (heroCarouselResumeTimeoutRef.current) {
+      window.clearTimeout(heroCarouselResumeTimeoutRef.current);
+    }
+
+    heroCarouselResumeTimeoutRef.current = window.setTimeout(() => {
+      setIsHeroCarouselAutoplayActive(true);
+      heroCarouselResumeTimeoutRef.current = null;
+    }, 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (!heroCarouselResumeTimeoutRef.current) {
+        return;
+      }
+
+      window.clearTimeout(heroCarouselResumeTimeoutRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!heroCarouselApi || heroSlides.length <= 1 || !isHeroCarouselAutoplayActive) {
+      return;
+    }
+
+    const autoAdvanceInterval = window.setInterval(() => {
+      heroCarouselApi.scrollNext();
+    }, shouldReduceMotion ? 3000 : 2000);
+
+    return () => {
+      window.clearInterval(autoAdvanceInterval);
+    };
+  }, [heroCarouselApi, heroSlides.length, isHeroCarouselAutoplayActive, shouldReduceMotion]);
 
   return (
     <ScrollRevealSection id="inicio" className="relative isolate overflow-x-clip border-b border-border/70" variants={stagger}>
@@ -114,7 +154,7 @@ export function HeroSection() {
       <div ref={heroRef} className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-14 pt-12 md:px-6 md:pb-20 md:pt-20">
         <div className="pointer-events-none absolute left-1/2 top-3 h-72 w-72 -translate-x-1/2 rounded-full bg-hero-glow blur-3xl md:top-0 md:h-96 md:w-96" />
 
-        <div className="relative grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="relative grid gap-8 md:grid-cols-[minmax(0,1.22fr)_minmax(0,0.78fr)] md:items-center xl:grid-cols-[minmax(0,1.28fr)_minmax(0,0.72fr)]">
           <motion.div
             variants={fadeUp}
             whileHover={shouldReduceMotion ? undefined : { y: -2 }}
@@ -130,7 +170,7 @@ export function HeroSection() {
                 <CardHeader className="HeroCardHeader relative z-10 space-y-0 p-6 md:p-8">
                   {eyebrow ? <Eyebrow className="mb-4 text-primary/92">{eyebrow}</Eyebrow> : null}
                   {title ? (
-                    <CardTitle className="HeroCardTitle mb-4 text-3xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:text-[2.85rem]">
+                    <CardTitle className="HeroCardTitle mb-6 whitespace-pre-line text-3xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-4xl md:mb-12 md:text-[2.85rem]">
                       {renderTitleWithEmphasis(title, titleEmphasisKeywords)}
                     </CardTitle>
                   ) : null}
@@ -223,7 +263,14 @@ export function HeroSection() {
           <motion.div variants={fadeUp}>
             <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-card/85 p-3 shadow-soft backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-border hover:shadow-lift focus-within:-translate-y-0.5 focus-within:border-border focus-within:shadow-lift supports-[backdrop-filter]:bg-card/72">
               {heroSlides.length > 0 ? (
-                <Carousel opts={{ align: "start", loop: false }} className="w-full">
+                <Carousel
+                  setApi={setHeroCarouselApi}
+                  opts={{ align: "start", loop: true, duration: 30 }}
+                  className="w-full"
+                  onPointerDownCapture={handleHeroCarouselInteraction}
+                  onClickCapture={handleHeroCarouselInteraction}
+                  onFocusCapture={handleHeroCarouselInteraction}
+                >
                   <CarouselContent className="-ml-0">
                     {heroSlides.map((slide) => (
                       <CarouselItem key={slide.id} className="pl-0">

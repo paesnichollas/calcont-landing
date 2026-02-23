@@ -77,7 +77,7 @@ export const navbarContent: NavbarContent = {
 
 export const heroContent: HeroContent = {
   eyebrow: "Decisão, controle e crescimento com base em dados",
-  title: "Cresça com controle. Decida com dados. Escale com segurança fiscal.",
+  title: "Cresça com controle.\nDecida com dados.\nEscale com segurança fiscal.",
   description:
     "Transformamos rotinas contábeis e fiscais em inteligência prática para reduzir riscos, proteger seu caixa e dar previsibilidade ao crescimento.",
   primaryCtaLabel: "Quero estruturar minha empresa",
