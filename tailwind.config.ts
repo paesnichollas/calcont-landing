@@ -52,7 +52,9 @@ const config = {
         sm: "calc(var(--radius) - 0.25rem)"
       },
       boxShadow: {
-        surface: "0 1.15rem 2.6rem -1.8rem hsl(var(--foreground) / 0.42), 0 0 0 1px hsl(var(--border) / 0.5)"
+        soft: "0 1rem 2.4rem -1.7rem hsl(var(--foreground) / 0.3), 0 0 0 1px hsl(var(--border) / 0.5)",
+        lift: "0 1.5rem 3rem -1.7rem hsl(var(--foreground) / 0.42), 0 0 0 1px hsl(var(--border) / 0.65)",
+        surface: "0 1rem 2.4rem -1.7rem hsl(var(--foreground) / 0.3), 0 0 0 1px hsl(var(--border) / 0.5)"
       }
     }
   },

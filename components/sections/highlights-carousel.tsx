@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { ScrollRevealSection } from "@/components/motion/scroll-reveal-section";
 import { useRevealMotion } from "@/components/motion/reveal";
+import { Eyebrow } from "@/components/typography/eyebrow";
 import {
   Carousel,
   CarouselContent,
@@ -34,6 +35,7 @@ const highlightIcons: Record<HighlightIconName, LucideIcon> = {
 export function HighlightsCarouselSection() {
   const items = highlightsContent.items ?? [];
   const { fadeUp, stagger } = useRevealMotion();
+  const sectionEyebrow = highlightsContent.eyebrow.trim();
 
   if (items.length === 0) {
     return null;
@@ -41,8 +43,9 @@ export function HighlightsCarouselSection() {
 
   return (
     <ScrollRevealSection id="destaques" className="mx-auto w-full max-w-6xl px-4 py-12 md:px-6 md:py-16" variants={stagger}>
-      <div className="mb-6 space-y-2 md:mb-8">
-        {highlightsContent.title ? <h2 className="text-2xl font-semibold md:text-3xl">{highlightsContent.title}</h2> : null}
+      <div className="mb-6 md:mb-8">
+        {sectionEyebrow ? <Eyebrow className="mb-3">{sectionEyebrow}</Eyebrow> : null}
+        {highlightsContent.title ? <h2 className="mb-4 text-2xl font-semibold md:text-3xl">{highlightsContent.title}</h2> : null}
         {highlightsContent.description ? (
           <p className="max-w-2xl text-sm text-muted-foreground md:text-base">{highlightsContent.description}</p>
         ) : null}
@@ -50,13 +53,13 @@ export function HighlightsCarouselSection() {
 
       <motion.div variants={fadeUp} className="relative">
         <Carousel opts={{ align: "start", loop: false }} className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-2 py-2 pr-2 md:-ml-4 md:pr-4">
             {items.map((item) => {
               const Icon = highlightIcons[item.icon] ?? ShieldCheck;
 
               return (
                 <CarouselItem key={item.id} className="basis-[86%] pl-2 sm:basis-[58%] md:pl-4 lg:basis-1/3">
-                  <Card className="h-full border-border/70 bg-card/70 transition-colors duration-200 hover:border-primary/30">
+                  <Card className="h-full bg-card/70 transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out motion-safe:hover:-translate-y-1 hover:shadow-lift">
                     <CardHeader className="space-y-3">
                       <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
                         <Icon className="h-5 w-5" aria-hidden />

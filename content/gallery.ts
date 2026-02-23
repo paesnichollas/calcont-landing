@@ -6,12 +6,14 @@ export type GalleryItem = {
 };
 
 export type GalleryContent = {
+  eyebrow: string;
   title: string;
   description: string;
   items: GalleryItem[];
 };
 
 export const galleryContent: GalleryContent = {
+  eyebrow: "Galeria",
   title: "Galeria",
   description: "Espaço visual para apresentar equipe, estrutura e rotina de atendimento.",
   items: [

@@ -68,7 +68,7 @@ export function useEmblaDeckEffects({
         ? "opacity 160ms linear"
         : "none"
       : transitionsEnabledRef.current
-        ? "transform 380ms cubic-bezier(0.22,1,0.36,1), opacity 360ms cubic-bezier(0.22,1,0.36,1), filter 360ms cubic-bezier(0.22,1,0.36,1)"
+        ? "transform 320ms cubic-bezier(0.22,1,0.36,1), opacity 300ms cubic-bezier(0.22,1,0.36,1), filter 300ms cubic-bezier(0.22,1,0.36,1)"
         : "none";
 
     for (let index = 0; index < slideCount; index += 1) {

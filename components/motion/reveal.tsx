@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { type Transition, type Variants } from "framer-motion";
+import { useMounted } from "@/components/hooks/use-mounted";
 
 const defaultTransition: Transition = {
-  duration: 0.4,
+  duration: 0.3,
   ease: [0.2, 0.65, 0.3, 0.9]
 };
 
@@ -12,8 +13,8 @@ const reducedTransition: Transition = {
   duration: 0.01
 };
 
-function buildFadeUpVariants(shouldReduceMotion: boolean): Variants {
-  if (shouldReduceMotion) {
+function buildFadeUpVariants(shouldAnimate: boolean): Variants {
+  if (!shouldAnimate) {
     return {
       hidden: { opacity: 1, y: 0 },
       show: { opacity: 1, y: 0, transition: reducedTransition }
@@ -21,13 +22,13 @@ function buildFadeUpVariants(shouldReduceMotion: boolean): Variants {
   }
 
   return {
-    hidden: { opacity: 0, y: 0.75 },
+    hidden: { opacity: 0, y: 8 },
     show: { opacity: 1, y: 0, transition: defaultTransition }
   };
 }
 
-function buildStaggerVariants(shouldReduceMotion: boolean): Variants {
-  if (shouldReduceMotion) {
+function buildStaggerVariants(shouldAnimate: boolean): Variants {
+  if (!shouldAnimate) {
     return {
       hidden: {},
       show: { transition: { staggerChildren: 0, delayChildren: 0 } }
@@ -36,7 +37,7 @@ function buildStaggerVariants(shouldReduceMotion: boolean): Variants {
 
   return {
     hidden: {},
-    show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } }
+    show: { transition: { staggerChildren: 0.06, delayChildren: 0.03 } }
   };
 }
 
@@ -70,14 +71,18 @@ function usePrefersReducedMotion() {
 }
 
 export function useRevealMotion() {
-  const shouldReduceMotion = usePrefersReducedMotion();
+  const mounted = useMounted();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const shouldAnimate = mounted && !prefersReducedMotion;
+  const shouldReduceMotion = !shouldAnimate;
 
   return useMemo(
     () => ({
       shouldReduceMotion,
-      fadeUp: buildFadeUpVariants(shouldReduceMotion),
-      stagger: buildStaggerVariants(shouldReduceMotion)
+      shouldAnimate,
+      fadeUp: buildFadeUpVariants(shouldAnimate),
+      stagger: buildStaggerVariants(shouldAnimate)
     }),
-    [shouldReduceMotion]
+    [shouldAnimate, shouldReduceMotion]
   );
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Calcont Team Placeholder</title>
+  <desc id="desc">Imagem de placeholder premium com fundo charcoal, detalhe bronze e destaque azul corporativo.</desc>
+  <defs>
+    <linearGradient id="bg" x1="40" y1="24" x2="600" y2="396" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e1a18" />
+      <stop offset="0.55" stop-color="#191614" />
+      <stop offset="1" stop-color="#120f0d" />
+    </linearGradient>
+    <radialGradient id="accentGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(520 92) rotate(90) scale(132 170)">
+      <stop offset="0" stop-color="#2f50f3" stop-opacity="0.4" />
+      <stop offset="1" stop-color="#2f50f3" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bronzeStroke" x1="58" y1="308" x2="602" y2="124" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8f6a44" stop-opacity="0.4" />
+      <stop offset="1" stop-color="#b4895f" stop-opacity="0.88" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#bg)" />
+  <rect width="640" height="420" fill="url(#accentGlow)" />
+  <path d="M-36 334C122 266 296 226 684 118" fill="none" stroke="url(#bronzeStroke)" stroke-width="2.5" />
+  <path d="M-44 368C94 318 286 284 684 228" fill="none" stroke="#a2794f" stroke-opacity="0.2" stroke-width="1.2" />
+  <rect x="48" y="52" width="544" height="316" rx="24" fill="none" stroke="#b4895f" stroke-opacity="0.2" />
+  <circle cx="542" cy="90" r="5.5" fill="#2f50f3" fill-opacity="0.9" />
+  <text x="50" y="364" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="34" letter-spacing="0.34em" fill="#ffffff" fill-opacity="0.13">CALCONT TEAM</text>
+</svg>

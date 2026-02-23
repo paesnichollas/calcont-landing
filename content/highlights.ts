@@ -9,12 +9,14 @@ export type HighlightItem = {
 };
 
 export type HighlightsContent = {
+  eyebrow: string;
   title: string;
   description: string;
   items: HighlightItem[];
 };
 
 export const highlightsContent: HighlightsContent = {
+  eyebrow: "Destaques",
   title: "Destaques da Calcont",
   description: "Diferenciais que combinam governança contábil, velocidade operacional e atendimento consultivo.",
   items: [

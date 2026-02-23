@@ -5,12 +5,14 @@ export type NumberStat = {
 };
 
 export type NumbersContent = {
+  eyebrow: string;
   title: string;
   description: string;
   items: NumberStat[];
 };
 
 export const numbersContent: NumbersContent = {
+  eyebrow: "Números",
   title: "Autoridade em números",
   description: "Indicadores institucionais para reforçar confiança e posicionamento corporativo.",
   items: [

@@ -2,16 +2,45 @@
 
 All editable copy and image references live under `content/*.ts`. Update those files and reload the page to confirm the UI still renders safely.
 
-## Hero, CTA, footer and navbar (`content/landing.ts`)
+## SEO config (`content/seo.ts`)
+
+- `siteName`, `siteUrl`, `titleDefault`, `titleTemplate`, and `descriptionDefault` feed global metadata.
+- `keywords` controls SEO keywords in `app/layout.tsx`.
+- `canonicalPath` controls canonical URL.
+- `ogImagePath` controls the default social image (current: `/og/og-default.png`).
+- `twitterHandle` is optional. Leave empty to skip handle metadata.
+
+## Copy base (`content/copy.ts`)
+
+- `nav` centralizes navbar labels, theme menu labels, and navigation item labels by id.
+- `hero` feeds headline/subheadline/CTA labels used by hero section.
+- `closingCta` feeds the final CTA card labels and text.
+- `sections.services`, `sections.team`, `sections.testimonials`, and `sections.numbers` centralize section heading copy and key labels.
+- `common.backToTopAriaLabel` centralizes accessibility copy for utility controls.
+- `differentials`, `services`, `howItWorks`, and `faq` keep strategic copy in one place for future sections.
+
+## Hero, CTA, footer and navbar navigation (`content/landing.ts`)
 
 - `heroContent` controls eyebrow, headline, description, CTA labels, hero background image, and hero carousel slides.
 - `ctaContent` controls the final CTA section copy.
 - `footerContent` controls brand/legal copy.
+- `navbarContent.brand` controls the navbar brand label fallback.
 - `navbarContent.navigation` controls section anchors. IDs must match section `id` attributes.
+- `navbarContent.themeMenuLabel`, `themeOptionLight`, `themeOptionDark`, and `themeOptionSystem` control the theme switcher labels.
 
 Fallback behavior:
 - Empty text fields are skipped in render.
 - `heroSlides` empty array falls back to `heroImageSrc`.
+- Hero and final CTA labels/text also fallback to `content/landing.ts` when `content/copy.ts` fields are empty.
+
+## Branding (`content/branding.ts`)
+
+- `brandName` controls the primary navbar brand label.
+- `logoSrc` controls the navbar logo source with deterministic options only: `"/brand/calcont-logo.png"` or `"/favicon.svg"`.
+- `logoAlt` controls the logo alt text.
+
+Fallback behavior:
+- Keep `logoSrc` as `"/favicon.svg"` until `public/brand/calcont-logo.png` exists in the repository.
 
 ## Signature band (`content/signature.ts`)
 
@@ -92,3 +121,4 @@ Fallback behavior:
 3. Confirm hero and gallery images render without layout jumps.
 4. Confirm CTA links open correctly.
 5. Confirm sections hide cleanly when arrays are emptied.
+6. Confirm `/robots.txt` and `/sitemap.xml` respond as expected.

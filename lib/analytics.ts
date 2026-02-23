@@ -12,10 +12,12 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const isAnalyticsEnabled = Boolean(GA_ID);
 
-export function trackEvent(eventName: AnalyticsEventName, params?: EventParams) {
+export function track(eventName: AnalyticsEventName, params?: EventParams) {
   if (typeof window === "undefined" || !GA_ID || typeof window.gtag !== "function") {
     return;
   }
 
   window.gtag("event", eventName, params ?? {});
 }
+
+export const trackEvent = track;
